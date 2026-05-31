@@ -5,22 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MAT 251 Calculus II Master Home Page</title>
 <style>
+
 :root{
   --bg:#f6f8fc; --ink:#172033; --muted:#5d6677; --card:#ffffff;
-  --blue:#1d4ed8; --blue2:#0f172a; --soft:#eaf1ff; --green:#ecfdf5;
-  --yellow:#fff7ed; --line:#e5e7eb;
+  --blue:#1d4ed8; --blue2:#0f172a; --soft:#eaf1ff; --line:#e5e7eb;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
 .hero{background:linear-gradient(135deg,var(--blue),var(--blue2));color:white;padding:42px 28px}
 .hero-inner{max-width:1120px;margin:auto}
 h1{font-size:38px;margin:0 0 10px}
-.hero p{font-size:18px;margin:0;max-width:850px;opacity:.94}
+.hero p{font-size:18px;margin:0;max-width:900px;opacity:.94}
 main{max-width:1120px;margin:auto;padding:24px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 24px rgba(15,23,42,.08);margin-bottom:18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card,.week-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 24px rgba(15,23,42,.08);margin-bottom:18px}
 .week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-.week-card{background:white;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,.07)}
+.week-card{margin-bottom:0}
 .week-card h2{font-size:20px;margin:0 0 4px;color:#0f172a}
 .week-card h3{font-size:15px;margin:0 0 10px;color:var(--blue)}
 .week-card p{color:var(--muted);margin:0 0 14px}
@@ -28,7 +27,6 @@ main{max-width:1120px;margin:auto;padding:24px}
 a.btn{display:inline-block;padding:9px 12px;border-radius:999px;text-decoration:none;font-weight:700;font-size:14px}
 .primary{background:var(--blue);color:white}
 .secondary{background:var(--soft);color:#1e3a8a}
-.disabled{background:#f3f4f6;color:#9ca3af;cursor:not-allowed}
 .badge{display:inline-block;background:var(--soft);color:#1e3a8a;border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;margin:3px 4px 3px 0}
 .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
 .step{background:#f8fafc;border-left:5px solid var(--blue);padding:12px;border-radius:12px}
@@ -51,9 +49,9 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px}
     <h2>How to Use This System</h2>
     <div class="flow">
       <div class="step"><strong>1. Preview</strong>Open the weekly organizer before starting the week.</div>
-      <div class="step"><strong>2. Learn</strong>Work through the standalone lesson and pause at each understanding check.</div>
+      <div class="step"><strong>2. Learn</strong>Work through the lesson and pause at each understanding check.</div>
       <div class="step"><strong>3. Reteach</strong>If a check is missed, use the reteach loop before moving on.</div>
-      <div class="step"><strong>4. Practice</strong>Finish with guided practice problems without looking for answers first.</div>
+      <div class="step"><strong>4. Practice</strong>Finish with guided practice problems before looking anything up.</div>
       <div class="step"><strong>5. Quiz</strong>Use the weekly quiz to track standards mastery.</div>
       <div class="step"><strong>6. Repeat</strong>Return on Day 1, Day 3, Day 7, and before the test.</div>
     </div>
@@ -78,58 +76,82 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:24px}
       
     <section class="week-card">
       <h2>Week 1: Calc I Survival Review</h2>
-      <h3>L’Hôpital’s Rule, u-substitution, FTC, area between curves</h3>
-      <p>Preview the organizer first, then work through the lesson, checks, reteach loops, practice, and weekly quiz.</p>
-      <div class="btn-row"><span class="btn disabled">Organizer missing</span><span class="btn disabled">Lesson file not found</span></div>
+      <h3>L’Hôpital’s Rule, u-substitution, FTC, and area between curves.</h3>
+      <p>Start with the organizer for the visual map, then work through the lesson for checks, reteach loops, diagnostics, practice, and quiz review.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="week_01_calc1_survival_review.html">Open Organizer</a>
+        <a class="btn secondary" href="week_1_calc2_calc_i_survival_review.html">Open Lesson</a>
+      </div>
     </section>
     
     <section class="week-card">
-      <h2>Week 2: Applications of Integration</h2>
-      <h3>Net change, velocity/position, and area between curves</h3>
-      <p>Preview the organizer first, then work through the lesson, checks, reteach loops, practice, and weekly quiz.</p>
-      <div class="btn-row"><span class="btn disabled">Organizer missing</span><span class="btn disabled">Lesson file not found</span></div>
+      <h2>Week 2: Applications of Integration I</h2>
+      <h3>Net change, velocity/position, accumulation, and area between curves.</h3>
+      <p>Start with the organizer for the visual map, then work through the lesson for checks, reteach loops, diagnostics, practice, and quiz review.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="week_02_applications_integration.html">Open Organizer</a>
+        <a class="btn secondary" href="week_2_calc2_applications_of_integration_i.html">Open Lesson</a>
+      </div>
     </section>
     
     <section class="week-card">
-      <h2>Week 3: Volumes, Arc Length, Surface Area</h2>
-      <h3>Disks, washers, shells, arc length, surface area</h3>
-      <p>Preview the organizer first, then work through the lesson, checks, reteach loops, practice, and weekly quiz.</p>
-      <div class="btn-row"><span class="btn disabled">Organizer missing</span><span class="btn disabled">Lesson file not found</span></div>
+      <h2>Week 3: Applications of Integration II</h2>
+      <h3>Volumes, disks, washers, shells, arc length, and surface area.</h3>
+      <p>Start with the organizer for the visual map, then work through the lesson for checks, reteach loops, diagnostics, practice, and quiz review.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="week_03_volumes_arc_surface.html">Open Organizer</a>
+        <a class="btn secondary" href="week_3_calc2_applications_of_integration_ii.html">Open Lesson</a>
+      </div>
     </section>
     
     <section class="week-card">
-      <h2>Week 4: Logs, Exponentials, Hyperbolics</h2>
-      <h3>Exponential/log integration, models, hyperbolic functions</h3>
-      <p>Preview the organizer first, then work through the lesson, checks, reteach loops, practice, and weekly quiz.</p>
-      <div class="btn-row"><span class="btn disabled">Organizer missing</span><span class="btn disabled">Lesson file not found</span></div>
+      <h2>Week 4: Logs, Exponentials, and Hyperbolics</h2>
+      <h3>Logarithmic/exponential functions, modeling, and hyperbolic functions.</h3>
+      <p>Start with the organizer for the visual map, then work through the lesson for checks, reteach loops, diagnostics, practice, and quiz review.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="week_04_logs_exponentials_hyperbolic.html">Open Organizer</a>
+        <a class="btn secondary" href="week_4_calc2_logs_exponentials_and_hyperbolic_functions.html">Open Lesson</a>
+      </div>
     </section>
     
     <section class="week-card">
       <h2>Week 5: Integration Techniques I</h2>
-      <h3>Basic approaches, integration by parts, trig integrals</h3>
-      <p>Preview the organizer first, then work through the lesson, checks, reteach loops, practice, and weekly quiz.</p>
-      <div class="btn-row"><span class="btn disabled">Organizer missing</span><span class="btn disabled">Lesson file not found</span></div>
+      <h3>Basic approaches, integration by parts, and trigonometric integrals.</h3>
+      <p>Start with the organizer for the visual map, then work through the lesson for checks, reteach loops, diagnostics, practice, and quiz review.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="week_05_integration_techniques_1.html">Open Organizer</a>
+        <a class="btn secondary" href="week_5_calc2_integration_techniques_i.html">Open Lesson</a>
+      </div>
     </section>
     
     <section class="week-card">
       <h2>Week 6: Integration Techniques II</h2>
-      <h3>Trig substitution, partial fractions, improper integrals, differential equations</h3>
-      <p>Preview the organizer first, then work through the lesson, checks, reteach loops, practice, and weekly quiz.</p>
-      <div class="btn-row"><span class="btn disabled">Organizer missing</span><span class="btn disabled">Lesson file not found</span></div>
+      <h3>Trig substitution, partial fractions, improper integrals, and differential equations.</h3>
+      <p>Start with the organizer for the visual map, then work through the lesson for checks, reteach loops, diagnostics, practice, and quiz review.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="week_06_integration_techniques_2.html">Open Organizer</a>
+        <a class="btn secondary" href="week_6_calc2_integration_techniques_ii.html">Open Lesson</a>
+      </div>
     </section>
     
     <section class="week-card">
-      <h2>Week 7: Sequences and Series</h2>
-      <h3>Sequences, convergence, infinite series, tests</h3>
-      <p>Preview the organizer first, then work through the lesson, checks, reteach loops, practice, and weekly quiz.</p>
-      <div class="btn-row"><span class="btn disabled">Organizer missing</span><span class="btn disabled">Lesson file not found</span></div>
+      <h2>Week 7: Sequences and Infinite Series</h2>
+      <h3>Sequences, convergence, infinite series, and convergence tests.</h3>
+      <p>Start with the organizer for the visual map, then work through the lesson for checks, reteach loops, diagnostics, practice, and quiz review.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="week_07_sequences_series.html">Open Organizer</a>
+        <a class="btn secondary" href="week_7_calc2_sequences_and_infinite_series.html">Open Lesson</a>
+      </div>
     </section>
     
     <section class="week-card">
-      <h2>Week 8: Power Series, Parametric, Polar</h2>
-      <h3>Power series, parametric curves, polar coordinates, final prep</h3>
-      <p>Preview the organizer first, then work through the lesson, checks, reteach loops, practice, and weekly quiz.</p>
-      <div class="btn-row"><span class="btn disabled">Organizer missing</span><span class="btn disabled">Lesson file not found</span></div>
+      <h2>Week 8: Power Series, Parametric, and Polar</h2>
+      <h3>Power series, Taylor ideas, parametric curves, polar coordinates, and final prep.</h3>
+      <p>Start with the organizer for the visual map, then work through the lesson for checks, reteach loops, diagnostics, practice, and quiz review.</p>
+      <div class="btn-row">
+        <a class="btn primary" href="week_08_power_parametric_polar.html">Open Organizer</a>
+        <a class="btn secondary" href="week_8_calc2_power_series_parametric_and_polar_curves.html">Open Lesson</a>
+      </div>
     </section>
     
     </div>
