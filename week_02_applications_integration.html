@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Week 2: Applications of Integration</title>
+<style>
+:root{--bg:#f7f8fb;--card:#ffffff;--ink:#1f2937;--muted:#5b6472;--accent:#1d4ed8;--soft:#e0ecff;--warn:#fff7ed;--ok:#ecfdf5;}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:linear-gradient(135deg,#1d4ed8,#0f172a);color:white;padding:34px 28px}
+header h1{margin:0;font-size:32px}
+header p{margin:8px 0 0;font-size:17px;opacity:.92}
+main{max-width:1050px;margin:0 auto;padding:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.card{background:var(--card);border-radius:16px;padding:18px;box-shadow:0 6px 18px rgba(15,23,42,.08);border:1px solid #e5e7eb}
+.card h2{font-size:20px;margin:0 0 10px;color:#0f172a}
+.card h3{font-size:16px;margin:14px 0 8px;color:#1d4ed8}
+ul{padding-left:22px;margin:8px 0}
+li{margin:6px 0}
+.formula{background:#f8fafc;border-left:5px solid var(--accent);padding:10px 12px;margin:10px 0;border-radius:10px}
+.check{background:var(--ok)}
+.warn{background:var(--warn)}
+.tag{display:inline-block;background:var(--soft);color:#1e3a8a;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:bold;margin:3px}
+.print-note{font-size:13px;color:var(--muted);margin-top:8px}
+footer{padding:20px 28px;color:var(--muted);font-size:13px;text-align:center}
+@media print{body{background:white}header{background:#111827;color:white}.card{box-shadow:none;break-inside:avoid}main{padding:14px}.no-print{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Week 2: Applications of Integration</h1>
+  <p>Net change, velocity, position, and area between curves</p>
+</header>
+<main>
+  <section class="card">
+    <h2>Mission for the Week</h2>
+    <p>Use this organizer before the week begins, then revisit it after each study session. The goal is not just to “see” the topic, but to recognize the problem type, choose a method, and explain the reasoning.</p>
+    <div><span class="tag">Displacement</span><span class="tag">Distance Traveled</span><span class="tag">Future Value</span><span class="tag">Area Between Curves</span></div>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Big Ideas</h2>
+      <ul><li>An integral accumulates change.</li>
+<li>Velocity integrates to displacement.</li>
+<li>Speed integrates to total distance.</li>
+<li>Rates connect to future values.</li></ul>
+    </section>
+
+    <section class="card">
+      <h2>Formula / Tool Bank</h2>
+      <div class="formula"><strong>Displacement:</strong> ∫[a,b] v(t) dt</div>
+<div class="formula"><strong>Distance Traveled:</strong> ∫[a,b] |v(t)| dt</div>
+<div class="formula"><strong>Future Value:</strong> Q(t) = Q(0) + ∫[0,t] Q′(x) dx</div>
+<div class="formula"><strong>Area Between Curves:</strong> A = ∫[a,b] (upper − lower) dx</div>
+    </section>
+  </div>
+
+  <div class="grid">
+    <section class="card check">
+      <h2>Understanding Checks</h2>
+      <ul><li>☐ Can I tell whether the problem asks for displacement or distance?</li>
+<li>☐ Can I split an integral where velocity changes sign?</li>
+<li>☐ Can I write a future-value equation from a rate?</li>
+<li>☐ Can I describe what the units of the integral mean?</li></ul>
+    </section>
+
+    <section class="card warn">
+      <h2>Common Mistakes to Watch</h2>
+      <ul><li>Treating distance and displacement as the same.</li>
+<li>Ignoring negative area below the axis.</li>
+<li>Not using absolute value for speed.</li>
+<li>Forgetting initial value in accumulation problems.</li></ul>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>Reteach Loop</h2>
+    <p><strong>If stuck:</strong> pause, rewrite the problem type in plain English, identify the target quantity, circle the given information, and choose the method before doing any algebra.</p>
+    <ol>
+      <li>What kind of problem is this?</li>
+      <li>What is the target: value, area, volume, convergence, slope, or model?</li>
+      <li>What formula or test fits?</li>
+      <li>What would a wrong setup look like?</li>
+      <li>Can I explain the first step out loud?</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2>Spaced Repetition Plan</h2>
+    <ul>
+      <li><strong>Day 0:</strong> Preview this organizer and attempt 2 easy examples.</li>
+      <li><strong>Day 1:</strong> Redo one example from memory.</li>
+      <li><strong>Day 3:</strong> Mix this topic with one older topic.</li>
+      <li><strong>Day 7:</strong> Complete a short quiz without notes.</li>
+      <li><strong>Before exam:</strong> Rework missed problems only, then complete one mixed review set.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Weekly Standards Tracker</h2>
+    <ul>
+      <li>☐ I can recognize the main problem types for this week.</li>
+      <li>☐ I can choose the correct formula, test, or method.</li>
+      <li>☐ I can complete routine problems without notes.</li>
+      <li>☐ I can explain why the method works.</li>
+      <li>☐ I can avoid the most common mistakes listed above.</li>
+    </ul>
+    <p class="print-note">Suggested quiz score target: 80% or higher before moving on confidently.</p>
+  </section>
+</main>
+<footer>MAT 251 Calculus II Weekly Graphic Organizer</footer>
+</body>
+</html>
