@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAT 251 — Calculus II Learning Hub</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ink:#0f0f0d;
+  --ink2:#4a4a46;
+  --ink3:#8a8a84;
+  --paper:#faf9f6;
+  --paper2:#f2f0eb;
+  --paper3:#e8e5de;
+  --rule:rgba(0,0,0,0.10);
+  --rule2:rgba(0,0,0,0.18);
+  --teal:#0b7c5e;
+  --teal-bg:#e4f4ef;
+  --amber:#9a5f00;
+  --amber-bg:#fdf3e0;
+  --violet:#4a3fb5;
+  --violet-bg:#eeecfc;
+  --coral:#b83a1a;
+  --coral-bg:#fdeee9;
+  --slate:#2d4a6a;
+  --slate-bg:#e6eef6;
+  --mono:'DM Mono', ui-monospace, monospace;
+  --sans:'DM Sans', system-ui, sans-serif;
+}
+
+@media(prefers-color-scheme:dark){:root{
+  --ink:#e8e8e2;
+  --ink2:#a8a8a0;
+  --ink3:#6a6a62;
+  --paper:#181815;
+  --paper2:#222220;
+  --paper3:#2a2a27;
+  --rule:rgba(255,255,255,0.08);
+  --rule2:rgba(255,255,255,0.14);
+  --teal:#2db88a;
+  --teal-bg:#0a2e22;
+  --amber:#e8a030;
+  --amber-bg:#2a1f08;
+  --violet:#8b82e8;
+  --violet-bg:#16123a;
+  --coral:#e87055;
+  --coral-bg:#2e1208;
+  --slate:#7aa8d4;
+  --slate-bg:#0e1e30;
+}}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  font-size:16px;
+  line-height:1.6;
+}
+
+/* ── GRID RULE BACKGROUND ── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size:40px 40px;
+  pointer-events:none;
+  z-index:0;
+}
+
+.wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 1.5rem}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--paper);
+  border-bottom:1px solid var(--rule2);
+  padding:.75rem 0;
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  max-width:960px;margin:0 auto;padding:0 1.5rem;
+}
+.nav-brand{
+  font-family:var(--mono);
+  font-size:13px;font-weight:500;
+  color:var(--ink);
+  text-decoration:none;
+  letter-spacing:.02em;
+  display:flex;align-items:center;gap:8px;
+}
+.nav-brand .course-code{
+  background:var(--ink);color:var(--paper);
+  padding:2px 8px;border-radius:4px;
+  font-size:12px;
+}
+.nav-links{display:flex;gap:4px}
+.nav-link{
+  font-size:13px;color:var(--ink2);text-decoration:none;
+  padding:5px 10px;border-radius:6px;
+  transition:background .12s,color .12s;
+}
+.nav-link:hover{background:var(--paper2);color:var(--ink)}
+
+/* ── HERO ── */
+.hero{
+  padding:5rem 0 3.5rem;
+  border-bottom:1px solid var(--rule2);
+}
+.hero-eyebrow{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  color:var(--teal);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:1rem;display:flex;align-items:center;gap:8px;
+}
+.hero-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--teal)}
+.hero h1{
+  font-size:clamp(2.2rem, 5vw, 3.5rem);
+  font-weight:300;
+  letter-spacing:-.02em;
+  line-height:1.1;
+  margin-bottom:1rem;
+  color:var(--ink);
+}
+.hero h1 em{
+  font-style:normal;
+  font-weight:500;
+  color:var(--violet);
+}
+.hero-sub{
+  font-size:1.05rem;font-weight:300;color:var(--ink2);
+  max-width:540px;line-height:1.7;margin-bottom:2rem;
+}
+.hero-meta{
+  display:flex;gap:1.5rem;flex-wrap:wrap;
+  font-family:var(--mono);font-size:12px;color:var(--ink3);
+}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.hero-meta strong{color:var(--ink2);font-weight:500}
+
+/* ── PROGRESS TRACKER ── */
+.tracker{
+  padding:2.5rem 0;
+  border-bottom:1px solid var(--rule2);
+}
+.tracker-label{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:1.25rem;
+}
+.week-strip{
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  gap:6px;
+}
+@media(max-width:640px){.week-strip{grid-template-columns:repeat(4,1fr)}}
+.week-pip{
+  aspect-ratio:1;
+  border-radius:8px;
+  border:1px solid var(--rule2);
+  background:var(--paper2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;
+  cursor:pointer;
+  transition:all .15s;
+  text-decoration:none;
+  position:relative;
+  overflow:hidden;
+}
+.week-pip:hover{border-color:var(--rule2);background:var(--paper3)}
+.week-pip.available{border-color:var(--violet);background:var(--violet-bg);cursor:pointer}
+.week-pip.available:hover{background:var(--violet-bg);filter:brightness(.95)}
+.week-pip.coming{opacity:.45;cursor:default}
+.week-pip .wnum{
+  font-family:var(--mono);font-size:10px;font-weight:500;
+  color:var(--ink3);letter-spacing:.05em;
+}
+.week-pip.available .wnum{color:var(--violet)}
+.week-pip .wlabel{
+  font-size:9px;color:var(--ink3);text-align:center;
+  line-height:1.3;padding:0 4px;
+}
+.week-pip.available .wlabel{color:var(--ink2);font-weight:500}
+.week-pip .w-badge{
+  position:absolute;top:4px;right:4px;
+  width:7px;height:7px;border-radius:50%;background:var(--teal);
+}
+
+/* ── COURSE MAP ── */
+.course-map{padding:3rem 0;border-bottom:1px solid var(--rule2)}
+.section-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin-bottom:1.75rem;flex-wrap:wrap;gap:.5rem;
+}
+.section-head h2{
+  font-size:1.25rem;font-weight:500;letter-spacing:-.01em;
+}
+.section-head .mono-tag{
+  font-family:var(--mono);font-size:11px;color:var(--ink3);
+}
+
+.week-cards{display:flex;flex-direction:column;gap:1px;border:1px solid var(--rule2);border-radius:12px;overflow:hidden}
+.week-card{
+  background:var(--paper);
+  padding:1.25rem 1.5rem;
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  align-items:center;gap:1.25rem;
+  border-bottom:1px solid var(--rule);
+  transition:background .12s;
+}
+.week-card:last-child{border-bottom:none}
+.week-card:hover.is-available{background:var(--paper2)}
+.week-num-col{
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  color:var(--ink3);letter-spacing:.06em;
+}
+.week-num-col .wk-big{
+  font-size:2rem;font-weight:300;color:var(--ink);
+  line-height:1;display:block;letter-spacing:-.03em;
+}
+.week-info h3{font-size:.95rem;font-weight:500;margin-bottom:.2rem}
+.week-info .sections{
+  font-family:var(--mono);font-size:11px;color:var(--teal);
+  margin-bottom:.3rem;letter-spacing:.02em;
+}
+.week-info .topics{font-size:13px;color:var(--ink2);line-height:1.5}
+.week-info .dates{
+  font-family:var(--mono);font-size:11px;color:var(--ink3);
+  margin-top:.4rem;
+}
+.week-action{text-align:right;flex-shrink:0}
+.open-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 16px;
+  font-family:var(--sans);font-size:13px;font-weight:500;
+  text-decoration:none;
+  border-radius:8px;
+  transition:all .15s;
+  white-space:nowrap;
+}
+.open-btn.ready{
+  background:var(--ink);color:var(--paper);
+  border:1px solid var(--ink);
+}
+.open-btn.ready:hover{background:var(--ink2);border-color:var(--ink2)}
+.open-btn.soon{
+  background:transparent;color:var(--ink3);
+  border:1px solid var(--rule2);
+  cursor:default;
+  pointer-events:none;
+}
+.status-dot{
+  width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;
+}
+.dot-ready{background:var(--teal)}
+.dot-soon{background:var(--ink3)}
+
+/* phase pills on card */
+.phase-pills{display:flex;gap:4px;margin-top:.5rem;flex-wrap:wrap}
+.pill{
+  font-size:10px;font-weight:500;padding:2px 7px;border-radius:100px;
+  letter-spacing:.03em;
+}
+.pill-pre{background:var(--teal-bg);color:var(--teal)}
+.pill-post{background:var(--slate-bg);color:var(--slate)}
+.pill-quiz{background:var(--violet-bg);color:var(--violet)}
+.pill-review{background:var(--amber-bg);color:var(--amber)}
+
+/* chapter badge */
+.ch-divider{
+  display:flex;align-items:center;gap:1rem;
+  padding:.75rem 1.5rem;
+  background:var(--paper2);
+  border-bottom:1px solid var(--rule);
+  font-family:var(--mono);font-size:11px;font-weight:500;
+  color:var(--ink3);letter-spacing:.06em;text-transform:uppercase;
+}
+.ch-divider .ch-label{
+  background:var(--paper3);
+  padding:2px 10px;border-radius:4px;
+  color:var(--ink2);
+}
+
+/* ── HOW IT WORKS ── */
+.how{padding:3rem 0;border-bottom:1px solid var(--rule2)}
+.how-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:1px;
+  border:1px solid var(--rule2);
+  border-radius:12px;
+  overflow:hidden;
+  margin-top:1.75rem;
+}
+.how-card{
+  background:var(--paper);
+  padding:1.5rem;
+}
+.how-icon{
+  font-size:1.5rem;margin-bottom:.75rem;
+  width:40px;height:40px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--rule2);
+  background:var(--paper2);
+}
+.how-card h3{font-size:.9rem;font-weight:500;margin-bottom:.35rem}
+.how-card p{font-size:13px;color:var(--ink2);line-height:1.6}
+.step-num{
+  font-family:var(--mono);font-size:10px;color:var(--ink3);
+  letter-spacing:.06em;margin-bottom:.5rem;
+}
+
+/* ── FORMULA STRIP ── */
+.formula-strip{
+  padding:2rem 0;
+  border-bottom:1px solid var(--rule2);
+  overflow-x:auto;
+}
+.formula-scroll{
+  display:flex;gap:8px;
+  padding-bottom:.5rem;
+  min-width:max-content;
+}
+.formula-chip{
+  font-family:var(--mono);
+  font-size:12px;
+  padding:6px 14px;
+  border-radius:6px;
+  border:1px solid var(--rule2);
+  background:var(--paper2);
+  color:var(--ink2);
+  white-space:nowrap;
+  cursor:default;
+  transition:background .12s;
+}
+.formula-chip:hover{background:var(--paper3)}
+.formula-chip .ch{font-weight:500;color:var(--teal);margin-right:6px}
+
+/* ── FOOTER ── */
+footer{
+  padding:2.5rem 0;
+  border-top:1px solid var(--rule2);
+}
+.footer-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+  max-width:960px;margin:0 auto;padding:0 1.5rem;
+}
+.footer-copy{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+.footer-tag{
+  font-family:var(--mono);font-size:11px;
+  padding:3px 10px;border-radius:100px;
+  background:var(--paper2);border:1px solid var(--rule2);
+  color:var(--ink3);
+}
+
+/* ── MODAL VIEWER ── */
+.modal-overlay{
+  display:none;
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(4px);
+  align-items:flex-start;justify-content:center;
+  padding:2rem 1rem;
+  overflow-y:auto;
+}
+.modal-overlay.open{display:flex}
+.modal-box{
+  background:var(--paper);
+  border-radius:14px;
+  width:100%;max-width:860px;
+  box-shadow:0 24px 80px rgba(0,0,0,.3);
+  overflow:hidden;
+  flex-shrink:0;
+}
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.875rem 1.25rem;
+  border-bottom:1px solid var(--rule2);
+  background:var(--paper2);
+}
+.modal-title{font-size:13px;font-weight:500;font-family:var(--mono)}
+.modal-close{
+  width:28px;height:28px;border-radius:6px;
+  background:transparent;border:1px solid var(--rule2);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--ink2);
+  transition:background .12s;
+}
+.modal-close:hover{background:var(--paper3)}
+.modal-iframe-wrap{position:relative;width:100%;height:80vh;min-height:500px}
+.modal-iframe-wrap iframe{
+  position:absolute;inset:0;width:100%;height:100%;border:none;
+  border-radius:0 0 14px 14px;
+}
+.modal-loading{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;background:var(--paper);
+  font-family:var(--mono);font-size:12px;color:var(--ink3);
+  border-radius:0 0 14px 14px;
+}
+.spinner{
+  width:28px;height:28px;
+  border:2px solid var(--rule2);
+  border-top-color:var(--violet);
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.open-external{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;color:var(--ink3);text-decoration:none;
+  padding:4px 10px;border-radius:6px;border:1px solid var(--rule2);
+  transition:background .12s;margin-right:8px;
+}
+.open-external:hover{background:var(--paper3);color:var(--ink2)}
+
+@media(max-width:640px){
+  .hero{padding:3rem 0 2.5rem}
+  .week-card{grid-template-columns:60px 1fr;grid-template-rows:auto auto}
+  .week-action{grid-column:1/-1}
+  .how-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:400px){
+  .how-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <span class="course-code">MAT 251</span>
+      Calculus II
+    </a>
+    <div class="nav-links">
+      <a href="#weeks" class="nav-link">Weeks</a>
+      <a href="#how" class="nav-link">How it works</a>
+      <a href="#formulas" class="nav-link">Formulas</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-eyebrow">Summer 2026 · 8-Week Course</div>
+    <h1>Learn calculus<br><em>before and after</em><br>every lecture.</h1>
+    <p class="hero-sub">
+      Each week's module primes your brain before class, then reinforces retention
+      with spaced retrieval, multiple-choice problems, and misconception coaching —
+      built from your actual course schedule.
+    </p>
+    <div class="hero-meta">
+      <span><strong>June 1 – July 23</strong></span>
+      <span>·</span>
+      <span><strong>Mr. Han</strong> · 8C2</span>
+      <span>·</span>
+      <span><strong>Textbook:</strong> Calculus: Early Transcendentals</span>
+    </div>
+  </section>
+
+  <!-- QUICK WEEK STRIP -->
+  <section class="tracker" id="weeks">
+    <div class="tracker-label">Course progress — 8 weeks</div>
+    <div class="week-strip" id="weekStrip"></div>
+  </section>
+
+  <!-- COURSE MAP -->
+  <section class="course-map">
+    <div class="section-head">
+      <h2>Weekly learning modules</h2>
+      <span class="mono-tag">click any available week to open</span>
+    </div>
+    <div class="week-cards" id="weekCards"></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="section-head">
+      <h2>How each module works</h2>
+      <span class="mono-tag">evidence-based design</span>
+    </div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="step-num">01 · BEFORE CLASS</div>
+        <div class="how-icon">📖</div>
+        <h3>Pre-lecture primer</h3>
+        <p>Flashcards surface prerequisite knowledge. An interactive visual builds intuition. Anticipation questions prime you to notice key ideas during lecture.</p>
+      </div>
+      <div class="how-card">
+        <div class="step-num">02 · AFTER CLASS</div>
+        <div class="how-icon">🔁</div>
+        <h3>Spaced retrieval</h3>
+        <p>Three timed retrieval sessions — same day, +2 days, +7 days — fight the forgetting curve. Free-response before the reveal; the struggle is the learning.</p>
+      </div>
+      <div class="how-card">
+        <div class="step-num">03 · PRACTICE</div>
+        <div class="how-icon">✅</div>
+        <h3>Multiple-choice problems</h3>
+        <p>15–16 questions per week across easy, medium, and hard. Wrong answers unlock targeted hints. Skip any question. Score updates live.</p>
+      </div>
+      <div class="how-card">
+        <div class="step-num">04 · EXAM PREP</div>
+        <div class="how-icon">📝</div>
+        <h3>Misconceptions + review</h3>
+        <p>The most common exam mistakes, explained and fixed. A full exam-style problem set in weeks before tests. Self-assessment for every section.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULA QUICK-REFERENCE -->
+  <section class="formula-strip" id="formulas">
+    <div class="tracker-label" style="margin-bottom:1rem">Formula quick-reference — scroll →</div>
+    <div class="formula-scroll">
+      <div class="formula-chip"><span class="ch">6.1</span>A = ∫[f−g] dx</div>
+      <div class="formula-chip"><span class="ch">6.2</span>V = π∫[r]² dx (disk)</div>
+      <div class="formula-chip"><span class="ch">6.2</span>V = π∫[R²−r²] dx (washer)</div>
+      <div class="formula-chip"><span class="ch">6.2</span>V = 2π∫x·f dx (shell)</div>
+      <div class="formula-chip"><span class="ch">6.3</span>L = ∫√(1+[f′]²) dx</div>
+      <div class="formula-chip"><span class="ch">6.4</span>W = ∫F(x) dx · F=kx</div>
+      <div class="formula-chip"><span class="ch">6.5</span>f_avg = 1/(b−a)∫f dx</div>
+      <div class="formula-chip"><span class="ch">6.6</span>x̄ = ∫x·f dx / ∫f dx</div>
+      <div class="formula-chip"><span class="ch">6.7</span>F = ∫ρg·d(y)·w(y) dy</div>
+      <div class="formula-chip"><span class="ch">7.x</span>Coming week 4</div>
+      <div class="formula-chip"><span class="ch">8.x</span>Coming week 5–6</div>
+      <div class="formula-chip"><span class="ch">9.x</span>Coming week 7</div>
+      <div class="formula-chip"><span class="ch">10.x</span>Coming week 7</div>
+      <div class="formula-chip"><span class="ch">11–12</span>Coming week 8</div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">MAT 251 8C2 · Summer 2026 · June 1 – July 23</span>
+    <span class="footer-tag">Built with evidence-based pedagogy</span>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-header">
+      <span class="modal-title" id="modalTitle">Week 2 — Applications of Integration</span>
+      <div style="display:flex;align-items:center">
+        <a href="#" class="open-external" id="openExternal" target="_blank">↗ open in new tab</a>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+    </div>
+    <div class="modal-iframe-wrap">
+      <div class="modal-loading" id="modalLoading">
+        <div class="spinner"></div>
+        <span>Loading module…</span>
+      </div>
+      <iframe id="modalIframe" src="about:blank" onload="iframeLoaded()" title="Week learning module"></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+const weeks = [
+  {
+    num: 1,
+    dates: "June 1–6",
+    title: "Review & Bridge",
+    sections: "4.7, 5.3, 5.5",
+    topics: "Related rates, Riemann sums, substitution rule",
+    chLabel: "Ch. 4–5 Bridge",
+    chColor: "slate",
+    status: "coming",
+    phases: []
+  },
+  {
+    num: 2,
+    dates: "June 7–13",
+    title: "Applications of Integration",
+    sections: "6.1 – 6.3",
+    topics: "Area between curves, volumes of revolution, arc length",
+    chLabel: "Ch. 6 Part 1",
+    chColor: "teal",
+    status: "available",
+    file: "MAT251_Week2_Learning_Tool.html",
+    phases: ["pre","post","quiz"],
+    quiz: "Quiz #2 due"
+  },
+  {
+    num: 3,
+    dates: "June 14–20",
+    title: "More Applications",
+    sections: "6.4 – 6.7",
+    topics: "Work, average value, center of mass, hydrostatic force",
+    chLabel: "Ch. 6 Part 2",
+    chColor: "teal",
+    status: "available",
+    file: "MAT251_Week3_Learning_Tool.html",
+    phases: ["pre","post","quiz","review"],
+    quiz: "Quiz #3 & #4 due · Test #1 approaching"
+  },
+  {
+    num: 4,
+    dates: "June 21–27",
+    title: "Log, Exponential & Hyperbolic",
+    sections: "7.1 – 7.3",
+    topics: "Inverse functions, log/exp derivatives & integrals, hyperbolic functions",
+    chLabel: "Ch. 7",
+    chColor: "amber",
+    status: "coming",
+    phases: [],
+    quiz: "Quiz #4 · Test #1 (Ch. 6–7)"
+  },
+  {
+    num: 5,
+    dates: "June 28 – July 4",
+    title: "Integration Techniques I",
+    sections: "8.1 – 8.3",
+    topics: "Integration by parts, trig integrals, trig substitution",
+    chLabel: "Ch. 8 Part 1",
+    chColor: "violet",
+    status: "coming",
+    phases: []
+  },
+  {
+    num: 6,
+    dates: "July 5–11",
+    title: "Integration Techniques II",
+    sections: "8.4 – 8.9",
+    topics: "Partial fractions, improper integrals, numerical methods",
+    chLabel: "Ch. 8 Part 2",
+    chColor: "violet",
+    status: "coming",
+    phases: [],
+    quiz: "Quiz #5–#7 · Test #2 (Ch. 8–9)"
+  },
+  {
+    num: 7,
+    dates: "July 12–18",
+    title: "Sequences, Series & Diff. Eq.",
+    sections: "9.1 – 9.3, 10.1 – 10.8",
+    topics: "Differential equations, sequences, infinite series, convergence tests",
+    chLabel: "Ch. 9–10",
+    chColor: "coral",
+    status: "coming",
+    phases: [],
+    quiz: "Quiz #8–#10 · Test #3 (Ch. 10)"
+  },
+  {
+    num: 8,
+    dates: "July 19–23",
+    title: "Power Series & Polar Curves",
+    sections: "11.1 – 11.2, 12.2 – 12.3",
+    topics: "Power series, Taylor series, parametric equations, polar curves",
+    chLabel: "Ch. 11–12",
+    chColor: "coral",
+    status: "coming",
+    phases: [],
+    quiz: "Quiz #11 & #12 · Cumulative Final"
+  }
+];
+
+const phaseLabels = {
+  pre: ['pill-pre','Pre-lecture'],
+  post: ['pill-post','Post-lecture'],
+  quiz: ['pill-quiz','Practice problems'],
+  review: ['pill-review','Exam review']
+};
+
+function buildStrip(){
+  const strip = document.getElementById('weekStrip');
+  weeks.forEach(w => {
+    const a = document.createElement(w.status==='available'?'a':'div');
+    a.className = 'week-pip ' + w.status;
+    if(w.status==='available') {
+      a.href='#';
+      a.onclick = (e) => { e.preventDefault(); openModal(w); };
+    }
+    a.innerHTML = `
+      <span class="wnum">WK ${w.num}</span>
+      <span class="wlabel">${w.sections}</span>
+      ${w.status==='available'?'<div class="w-badge"></div>':''}
+    `;
+    strip.appendChild(a);
+  });
+}
+
+function buildCards(){
+  const container = document.getElementById('weekCards');
+  let lastCh = '';
+  weeks.forEach(w => {
+    if(w.chLabel !== lastCh){
+      const div = document.createElement('div');
+      div.className = 'ch-divider';
+      div.innerHTML = `<span class="ch-label">${w.chLabel}</span>`;
+      container.appendChild(div);
+      lastCh = w.chLabel;
+    }
+    const card = document.createElement('div');
+    card.className = 'week-card' + (w.status==='available'?' is-available':'');
+
+    const pillsHTML = w.phases.map(p =>
+      `<span class="pill ${phaseLabels[p][0]}">${phaseLabels[p][1]}</span>`
+    ).join('');
+
+    const btnHTML = w.status === 'available'
+      ? `<a href="#" class="open-btn ready" onclick="event.preventDefault();openModal(${JSON.stringify(w).replace(/"/g,'&quot;')})">
+           <span class="status-dot dot-ready"></span> Open module
+         </a>`
+      : `<span class="open-btn soon">
+           <span class="status-dot dot-soon"></span> Coming soon
+         </span>`;
+
+    card.innerHTML = `
+      <div class="week-num-col">
+        <span class="wk-big">W${w.num}</span>
+        <span style="font-size:10px;letter-spacing:.06em">WEEK ${w.num}</span>
+      </div>
+      <div class="week-info">
+        <div class="sections">${w.sections}</div>
+        <h3>${w.title}</h3>
+        <div class="topics">${w.topics}</div>
+        ${w.quiz ? `<div class="dates">📅 ${w.quiz}</div>` : ''}
+        ${pillsHTML ? `<div class="phase-pills">${pillsHTML}</div>` : ''}
+      </div>
+      <div class="week-action">${btnHTML}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function openModal(w){
+  const overlay = document.getElementById('modalOverlay');
+  const iframe = document.getElementById('modalIframe');
+  const title = document.getElementById('modalTitle');
+  const extLink = document.getElementById('openExternal');
+  const loading = document.getElementById('modalLoading');
+
+  title.textContent = `Week ${w.num} — ${w.title} (${w.sections})`;
+  extLink.href = w.file;
+  loading.style.display = 'flex';
+  iframe.style.opacity = '0';
+  iframe.src = w.file;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function iframeLoaded(){
+  const loading = document.getElementById('modalLoading');
+  const iframe = document.getElementById('modalIframe');
+  loading.style.display = 'none';
+  iframe.style.opacity = '1';
+}
+
+function closeModal(){
+  const overlay = document.getElementById('modalOverlay');
+  const iframe = document.getElementById('modalIframe');
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  setTimeout(() => { iframe.src = 'about:blank'; }, 300);
+}
+
+function handleOverlayClick(e){
+  if(e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape') closeModal();
+});
+
+buildStrip();
+buildCards();
+</script>
+</body>
+</html>
