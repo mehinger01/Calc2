@@ -8,13 +8,13 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#fff;--bg2:#f5f5f3;--bg3:#eeede9;--tx:#1a1a18;--tx2:#5a5a57;--tx3:#9a9a96;
+  --bg:#fff;--bg2:#f5f5f3;--bg3:#eeede9;--tx:#3d3d3a;--tx2:#6e6e6a;--tx3:#7a7a76;
   --bd:rgba(0,0,0,0.12);--bd2:rgba(0,0,0,0.22);--bd3:rgba(0,0,0,0.35);
   --fs:system-ui,-apple-system,sans-serif;--fm:ui-monospace,monospace;
   --r:8px;--rl:12px;
 }
 @media(prefers-color-scheme:dark){:root{
-  --bg:#1e1e1c;--bg2:#2a2a27;--bg3:#141412;--tx:#e8e8e4;--tx2:#a8a8a4;--tx3:#6a6a66;
+  --bg:#1e1e1c;--bg2:#2a2a27;--bg3:#141412;--tx:#f0f0ec;--tx2:#c8c8c4;--tx3:#909090;
   --bd:rgba(255,255,255,0.10);--bd2:rgba(255,255,255,0.18);--bd3:rgba(255,255,255,0.28);
 }}
 body{font-family:var(--fs);background:var(--bg3);color:var(--tx);padding:2rem 1rem;min-height:100vh}
@@ -93,7 +93,7 @@ textarea{width:100%;border:0.5px solid var(--bd2);border-radius:var(--r);padding
 .choice.wrong{border-color:#E24B4A;background:#FCEBEB;color:#501313}
 .choice.hint2-wrong{border-color:#BA7517;background:#FAEEDA;color:#412402}
 .choice.disabled{pointer-events:none;opacity:.6}
-.choice .letter{font-weight:500;min-width:16px;color:var(--tx3)}
+.choice .letter{font-weight:500;min-width:16px;color:var(--tx3)}.choice span:not(.letter){color:var(--tx)}
 .hint-box{font-size:12px;line-height:1.6;padding:.6rem .85rem;border-radius:var(--r);margin-bottom:.5rem;display:none}
 .hint-box.show{display:block}
 .hint-box.hint1{background:#FAEEDA;color:#633806;border:0.5px solid #EF9F27}
@@ -571,10 +571,16 @@ function buildQBlock(q){
   div.className='qblock';
   div.id='qblock-'+q.id;
 
-  let choicesHTML=q.choices.map(c=>`
-    <button class="choice${st.done?getChoiceClass(q,c.l,st):''}" onclick="selectChoice(${q.id},'${c.l}')" id="choice-${q.id}-${c.l}" ${st.done||st.skipped?'disabled':''}>
-      <span class="letter">${c.l}</span><span>${c.t}</span>
-    </button>`).join('');
+  const choicesHTML=q.choices.map(c=>{
+    let cls='choice';
+    if(st.done||st.skipped){
+      if(c.l===q.correct) cls+=' correct';
+      else if(st.wrongPicked&&st.wrongPicked.includes(c.l)) cls+=' wrong';
+      else cls+=' disabled';
+    }
+    const dis=(st.done||st.skipped)?'disabled':'';
+    return '<button class="'+cls+'" onclick="selectChoice('+q.id+',\''+c.l+'\')" '+dis+'><span class="letter">'+c.l+'</span><span>'+c.t+'</span></button>';
+  }).join('');
 
   let hint1HTML='', hint2HTML='', resultHTML='';
   if(st.attempts>=1 && !st.done && !st.skipped){
@@ -611,11 +617,7 @@ function buildQBlock(q){
   return div;
 }
 
-function getChoiceClass(q,letter,st){
-  if(letter===q.correct) return ' correct';
-  if(st.wrongPicked && st.wrongPicked.includes(letter)) return ' wrong';
-  return ' disabled';
-}
+// getChoiceClass inlined above
 
 function selectChoice(qid, letter){
   const q=questions.find(x=>x.id===qid);
